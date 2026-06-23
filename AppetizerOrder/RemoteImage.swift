@@ -1,0 +1,39 @@
+//
+//  RemoteImage.swift
+//  AppetizerOrder
+//
+//  Created by Almira Khafizova on 23.06.26.
+//
+
+import SwiftUI
+final class ImageLoader: ObservableObject {
+  @Published var image: Image? = nil
+  
+  func load(fromURLString urlString: String) {
+    NetworkManager.shared.downloadImage(fromURLString: urlString) { UIImage in
+      guard let uiImage = UIImage else { return }
+      DispatchQueue.main.async {
+        self.image = Image(uiImage: uiImage)
+      }
+    }
+  }
+  
+  struct RemoteImage: View {
+    var image: Image?
+    
+    var body: some View {
+      image?.resizable() ?? Image("food-placeholder").resizable()
+    }
+  }
+  
+  struct AppetizerRemoteImage: View {
+    
+    @StateObject var imageLoader = ImageLoader()
+    let urlString: String
+    
+    var body: some View {
+      RemoteImage(image: imageLoader.image)
+        .onAppear { imageLoader.load(fromURLString: urlString) }
+    }
+  }
+}

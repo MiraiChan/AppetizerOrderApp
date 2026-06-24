@@ -5,7 +5,6 @@
 //  Created by Almira Khafizova on 23.06.26.
 //
 
-
 import SwiftUI
 
 final class ImageLoader: ObservableObject {
@@ -31,7 +30,6 @@ struct RemoteImage: View {
     image?.resizable() ?? Image("food-placeholder").resizable()
   }
 }
-
 
 struct AppetizerRemoteImage: View {
   

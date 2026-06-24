@@ -10,15 +10,29 @@ final class AppetizerListViewModel: ObservableObject {
   @Published var appetizers: [Appetizer] = []
   @Published var alertItem: AlertItem?
   @Published var isLoading = false
+  @Published  var isShowingDetail = false
+  @Published  var selectedAppetizer: Appetizer?
+  
+  private let useMockData = true
   
   func getAppetizers() {
-    isLoading = true
+    
+    if useMockData {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        self.isLoading = false
+        self.appetizers = MockData.appetizers
+      }
+      return
+    }
+    
     NetworkManager.shared.getAppetizers { result in
       DispatchQueue.main.async { [self] in
         isLoading = false
+        
         switch result {
         case .success(let appetizers):
           self.appetizers = appetizers
+          
         case .failure(let error):
           switch error {
             

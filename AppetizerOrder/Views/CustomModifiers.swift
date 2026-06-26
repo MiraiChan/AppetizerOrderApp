@@ -16,7 +16,7 @@ struct StandardButtonStyle: ViewModifier {
       .controlSize(.large)
   }
 }
-
+//alternatively:
 extension View {
   func standardButtonStyle() -> some View {
     self.modifier(StandardButtonStyle())

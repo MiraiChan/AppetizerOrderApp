@@ -21,7 +21,6 @@ final class ImageLoader: ObservableObject {
   }
 }
 
-
 struct RemoteImage: View {
   
   var image: Image?

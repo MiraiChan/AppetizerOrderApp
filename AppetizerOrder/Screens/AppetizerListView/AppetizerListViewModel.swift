@@ -19,9 +19,9 @@ import SwiftUI
     
     Task {
       do {
-        //appetizers = try await NetworkManager.shared.getAppetizers()
-        try await Task.sleep(nanoseconds: 800_000_000)
-        appetizers = MockData.appetizers
+        appetizers = try await NetworkManager.shared.getAppetizers()
+//        try await Task.sleep(nanoseconds: 800_000_000)
+//        appetizers = MockData.appetizers
         
         isLoading = false
       } catch {
